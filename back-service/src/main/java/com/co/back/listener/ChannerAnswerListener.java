@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.co.back.config.GlobalEnv;
 import com.co.back.event.ChannelAnswerEvent;
 import com.co.back.service.impl.CallServiceImpl;
+import com.co.back.util.TTSUtil;
 import com.co.back.vo.CallingMobileVo;
 import org.freeswitch.esl.client.inbound.Client;
 import org.freeswitch.esl.client.transport.SendMsg;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -59,7 +61,15 @@ public class ChannerAnswerListener implements ApplicationListener<ChannelAnswerE
 
             }else if(currentNode.get("nodeContent")!=null && !currentNode.get("nodeContent").equals("")){
                 String content = currentNode.get("nodeContent").toString();
-
+                String filename = UUID.randomUUID().toString();
+                boolean flag = TTSUtil.process(content, filename);
+                if(flag){
+                    SendMsg msg = new SendMsg(uuid);
+                    msg.addCallCommand("execute");
+                    msg.addExecuteAppName("playback");
+                    msg.addExecuteAppArg("/usr/local/wav/"+filename+".wav");///usr/local/test
+                    fsInboundClient.sendMessage(msg);
+                }
             }
 
         }

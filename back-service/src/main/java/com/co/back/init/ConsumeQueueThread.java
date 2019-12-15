@@ -35,4 +35,28 @@ public class ConsumeQueueThread implements Runnable {
 
         }
     }
+
+    public QueueService getQueueService() {
+        return queueService;
+    }
+
+    public void setQueueService(QueueService queueService) {
+        this.queueService = queueService;
+    }
+
+    public GlobalEnv getGlobalEnv() {
+        return globalEnv;
+    }
+
+    public void setGlobalEnv(GlobalEnv globalEnv) {
+        this.globalEnv = globalEnv;
+    }
+
+    public PublishCenter getPublishCenter() {
+        return publishCenter;
+    }
+
+    public void setPublishCenter(PublishCenter publishCenter) {
+        this.publishCenter = publishCenter;
+    }
 }

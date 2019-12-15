@@ -153,6 +153,59 @@ public class TTSUtil {
             }
         }
     }
+
+
+    public static  boolean process(String content,String fileName) {
+        SpeechSynthesizer synthesizer = null;
+        try {
+            long time = new Date().getTime();
+            if(expiretime < time ){
+                AccessToken accessToken = new AccessToken(ak_id, ak_secret);
+                accessToken.apply();
+                expiretime = accessToken.getExpireTime()*1000;
+                if(client == null){
+                    client = new NlsClient(accessToken.getToken());
+                }else{
+                    client.setToken(accessToken.getToken());
+                }
+
+            }
+            //创建实例,建立连接
+            synthesizer = new SpeechSynthesizer(client, getSynthesizerListener(fileName));
+            synthesizer.setAppKey(appKey);
+            //设置返回音频的编码格式
+            synthesizer.setFormat(OutputFormatEnum.WAV);
+            //设置返回音频的采样率
+            synthesizer.setSampleRate(SampleRateEnum.SAMPLE_RATE_8K);
+            //发音人
+            synthesizer.setVoice("Siqi");
+            //语调，范围是-500~500，可选，默认是0
+            synthesizer.setPitchRate(0);
+            //语速，范围是-500~500，默认是0
+            synthesizer.setSpeechRate(0);
+            //设置用于语音合成的文本
+            synthesizer.setText(content);
+            //此方法将以上参数设置序列化为json发送给服务端,并等待服务端确认
+            long start = System.currentTimeMillis();
+            synthesizer.start();
+            logger.info("tts start latency " + (System.currentTimeMillis() - start) + " ms");
+            TTSUtil.startTime = System.currentTimeMillis();
+            //等待语音合成结束
+            synthesizer.waitForComplete();
+            logger.info("tts stop latency " + (System.currentTimeMillis() - start) + " ms");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            //关闭连接
+            if (null != synthesizer) {
+                synthesizer.close();
+            }
+        }
+    }
+
+
     public void shutdown() {
         client.shutdown();
     }
