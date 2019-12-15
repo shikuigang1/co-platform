@@ -15,6 +15,7 @@ public class SenceServiceImpl implements SenceService {
 
     @Autowired
     private SenceMapper senceMapper;
+
     @Override
     public void insertSence(Sence sence) {
         senceMapper.insert(sence);
@@ -22,6 +23,17 @@ public class SenceServiceImpl implements SenceService {
 
     @Override
     public void updateSence(Sence sence) {
+        senceMapper.updateByPrimaryKey(sence);
+    }
+
+    @Override
+    public void insertOrUpdate(Sence sence) {
+
+        if(sence.getId() == null){
+            senceMapper.insert(sence);
+        }else{
+            senceMapper.updateByPrimaryKey(sence);
+        }
 
     }
 }

@@ -15,6 +15,8 @@ public class Sence {
 
     private String sence_flow;
 
+    private String sence_global;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class Sence {
 
     public void setSence_flow(String sence_flow) {
         this.sence_flow = sence_flow == null ? null : sence_flow.trim();
+    }
+
+    public String getSence_global() {
+        return sence_global;
+    }
+
+    public void setSence_global(String sence_global) {
+        this.sence_global = sence_global == null ? null : sence_global.trim();
     }
 }

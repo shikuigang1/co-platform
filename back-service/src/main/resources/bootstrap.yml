@@ -1,5 +1,5 @@
 server:
-    port: 9000
+    port: 9001
 
 spring:
     application:
@@ -9,7 +9,7 @@ spring:
             config:
                 namespace: ${config.namespace}
                 server-addr: ${config.server-addr}
-                shared-dataids: db.properties,rabbitmq.properties
+                shared-dataids: db-co.properties,rabbitmq.properties,fs.properties
             discovery:
                 namespace: ${config.namespace}
                 server-addr: ${discovery.server-addr}
@@ -25,3 +25,6 @@ spring:
         prefix: classpath:/templates/
         suffix: .html
 
+mybatis:
+    mapper-locations:  classpath:mapper/*.xml
+    type-aliases-package:  com.co.back.entity

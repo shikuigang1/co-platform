@@ -22,13 +22,9 @@ import java.util.List;
 @Configuration
 public class Swagger2Config extends WebMvcConfigurationSupport {
 
-    @Value("${mybatis.mapper-locations}")
-    private String test;
-
     @Bean
     public Docket createRestApi() {
 
-        System.out.println(test);
         ParameterBuilder tokenPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<Parameter>();
         tokenPar.name("token").description("令牌").modelRef(new ModelRef("string")).parameterType("header").required(false).build();

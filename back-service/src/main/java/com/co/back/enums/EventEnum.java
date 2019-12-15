@@ -2,6 +2,7 @@ package com.co.back.enums;
 
 public enum EventEnum {
 
+    CALL("CALL","呼叫"),
     TIME_OUT("TIME_OUT", "超时事件"),
     SEND_MESSAGE("SEND_MESSAGE","发送短信"),
     GATHER_INFO("GATHER_INFO","采集事件"),

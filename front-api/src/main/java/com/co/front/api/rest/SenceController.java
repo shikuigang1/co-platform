@@ -40,13 +40,15 @@ public class SenceController {
     public ResponseEntity<?> saveSence(@RequestParam(value = "id",required = false) Integer id,
                                        @RequestParam(value = "sence_desc",required = false,defaultValue = "") String sence_desc,
                                        @RequestParam(value = "sence_flow") String sence_flow,
+                                       @RequestParam(value = "sence_global") String sence_global,
                                        @RequestParam(value = "sence_name",required = false,defaultValue = "") String sence_name){
         Sence sence = new Sence();
-        if(id != null )sence.setId(id);
+        sence.setId(id);
         sence.setSence_desc(sence_desc);
         sence.setSence_flow(sence_flow);
         sence.setSence_name(sence_name);
-        senceService.insertSence(sence);
+        sence.setSence_global(sence_global);
+        senceService.insertOrUpdate(sence);
         return   ResponseEntity.ok(new Object());
     }
 
@@ -54,6 +56,6 @@ public class SenceController {
     @ResponseBody
     public ResponseEntity<?> delSence(@RequestParam("senceID") String senceID){
 
-        return   ResponseEntity.ok(new Object());
+        return   ResponseEntity.ok(null);
     }
 }

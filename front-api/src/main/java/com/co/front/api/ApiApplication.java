@@ -19,8 +19,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 //@MapperScan("com.co.front.api.mapper")
 public class ApiApplication {
-
-
     public static void main(String[] args){
         SpringApplication.run(ApiApplication.class);
     }

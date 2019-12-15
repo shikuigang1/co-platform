@@ -1,0 +1,14 @@
+.idea/
+app-common/app-common.iml
+*.iml
+*.log*
+*/target/*
+/*/target/
+
+/.settings/
+*.project
+*.classpath
+**/.settings/
+*/.gitignore
+**.log
+*.iml

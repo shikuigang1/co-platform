@@ -12,4 +12,6 @@ public interface SenceService {
 
     void updateSence(Sence sence);
 
+    void insertOrUpdate(Sence sence);
+
 }

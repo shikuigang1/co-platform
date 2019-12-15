@@ -13,9 +13,9 @@ public class TimeOutEvent extends ApplicationEvent {
     private String desc;
 
     //private 当前流程上下文
-    public TimeOutEvent(Object source, JSONObject jsonObject) {
+    public TimeOutEvent(Object source) {
         super(source);
-        this.jsonT = jsonObject;
+        //this.jsonT = jsonObject;
     }
 
     public JSONObject getObject() {

@@ -8,6 +8,7 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="sence_desc" property="sence_desc" jdbcType="LONGVARCHAR" />
     <result column="sence_flow" property="sence_flow" jdbcType="LONGVARCHAR" />
+    <result column="sence_global" property="sence_global" jdbcType="LONGVARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_sence
@@ -15,11 +16,11 @@
   </delete>
   <insert id="insert" parameterType="com.co.front.api.entity.Sence" >
     insert into t_sence (id, sence_name, status, 
-      createtime, sence_desc, sence_flow
-      )
+      createtime, sence_desc, sence_flow, 
+      sence_global)
     values (#{id,jdbcType=INTEGER}, #{sence_name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{sence_desc,jdbcType=LONGVARCHAR}, #{sence_flow,jdbcType=LONGVARCHAR}
-      )
+      #{createtime,jdbcType=TIMESTAMP}, #{sence_desc,jdbcType=LONGVARCHAR}, #{sence_flow,jdbcType=LONGVARCHAR}, 
+      #{sence_global,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.co.front.api.entity.Sence" >
     update t_sence
@@ -27,16 +28,17 @@
       status = #{status,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       sence_desc = #{sence_desc,jdbcType=LONGVARCHAR},
-      sence_flow = #{sence_flow,jdbcType=LONGVARCHAR}
+      sence_flow = #{sence_flow,jdbcType=LONGVARCHAR},
+      sence_global = #{sence_global,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, sence_name, status, createtime, sence_desc, sence_flow
+    select id, sence_name, status, createtime, sence_desc, sence_flow, sence_global
     from t_sence
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, sence_name, status, createtime, sence_desc, sence_flow
+    select id, sence_name, status, createtime, sence_desc, sence_flow, sence_global
     from t_sence
   </select>
 </mapper>
